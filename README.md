@@ -1,4 +1,4 @@
-# 🖥️ BLOOMBERG TERMINAL - Professional News Terminal Interface
+# 🖥️ Assetpedia News - Professional News Terminal Interface
 
 Portal berita profesional dengan style terminal Bloomberg yang menampilkan judul berita dalam bentuk list yang dipisahkan berdasarkan kategori.
 
