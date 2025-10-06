@@ -1,0 +1,1056 @@
+[
+  {
+    "name": "NYT Small Business",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml",
+    "category": "Business"
+  },
+  {
+    "name": "NYT Economy",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml",
+    "category": "Economy"
+  },
+  {
+    "name": "NYT Dealbook",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Dealbook.xml",
+    "category": "Business"
+  },
+  {
+    "name": "NYT Media & Advertising",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/MediaandAdvertising.xml",
+    "category": "Business"
+  },
+  {
+    "name": "NYT Technology",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "NYT Personal Tech",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/PersonalTech.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "NYT Politics",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
+    "category": "Politics"
+  },
+  {
+    "name": "NYT US",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
+    "category": "News"
+  },
+  {
+    "name": "NYT Africa",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Africa.xml",
+    "category": "World"
+  },
+  {
+    "name": "NYT Americas",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Americas.xml",
+    "category": "World"
+  },
+  {
+    "name": "NYT Asia Pacific",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/AsiaPacific.xml",
+    "category": "World"
+  },
+  {
+    "name": "NYT Europe",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml",
+    "category": "World"
+  },
+  {
+    "name": "NYT Middle East",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+    "category": "World"
+  },
+  {
+    "name": "Antara Terkini",
+    "url": "https://www.antaranews.com/rss/terkini.xml",
+    "category": "News"
+  },
+  {
+    "name": "Antara Ekonomi",
+    "url": "https://www.antaranews.com/rss/ekonomi.xml",
+    "category": "Economy"
+  },
+  {
+    "name": "Antara Olahraga",
+    "url": "https://www.antaranews.com/rss/olahraga.xml",
+    "category": "Sports"
+  },
+  {
+    "name": "Antara Sports",
+    "url": "https://www.antaranews.com/rss/sports.xml",
+    "category": "Sports"
+  },
+  {
+    "name": "Antara Teknologi",
+    "url": "https://www.antaranews.com/rss/teknologi.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "Antara Ekonomi Finansial",
+    "url": "https://www.antaranews.com/rss/ekonomi-finansial.xml",
+    "category": "Economy"
+  },
+  {
+    "name": "Antara Top News",
+    "url": "https://www.antaranews.com/rss/top-news.xml",
+    "category": "News"
+  },
+  {
+    "name": "Antara Video",
+    "url": "https://www.antaranews.com/rss/video.xml",
+    "category": "Multimedia"
+  },
+  {
+    "name": "Antara Photo",
+    "url": "https://www.antaranews.com/rss/photo.xml",
+    "category": "Multimedia"
+  },
+  {
+    "name": "Antara Politik",
+    "url": "https://www.antaranews.com/rss/politik.xml",
+    "category": "Politics"
+  },
+  {
+    "name": "Antara Tekno",
+    "url": "https://www.antaranews.com/rss/tekno.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "Antara Rilis Pers",
+    "url": "https://www.antaranews.com/rss/rilis-pers.xml",
+    "category": "News"
+  },
+  {
+    "name": "Sky News Politics",
+    "url": "https://feeds.skynews.com/feeds/rss/politics.xml",
+    "category": "Politics"
+  },
+  {
+    "name": "Sky News World",
+    "url": "https://feeds.skynews.com/feeds/rss/world.xml",
+    "category": "World"
+  },
+  {
+    "name": "Sky News Technology",
+    "url": "https://feeds.skynews.com/feeds/rss/technology.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "Sky News Strange",
+    "url": "https://feeds.skynews.com/feeds/rss/strange.xml",
+    "category": "General"
+  },
+  {
+    "name": "Sky News UK",
+    "url": "https://feeds.skynews.com/feeds/rss/uk.xml",
+    "category": "News"
+  },
+  {
+    "name": "Sky News US",
+    "url": "https://feeds.skynews.com/feeds/rss/us.xml",
+    "category": "News"
+  },
+  {
+    "name": "CBS News Main",
+    "url": "https://www.cbsnews.com/latest/rss/main",
+    "category": "News"
+  },
+  {
+    "name": "CBS News US",
+    "url": "https://www.cbsnews.com/latest/rss/us",
+    "category": "News"
+  },
+  {
+    "name": "CBS News Politics",
+    "url": "https://www.cbsnews.com/latest/rss/politics",
+    "category": "Politics"
+  },
+  {
+    "name": "CBS News World",
+    "url": "https://www.cbsnews.com/latest/rss/world",
+    "category": "World"
+  },
+  {
+    "name": "CBS News Health",
+    "url": "https://www.cbsnews.com/latest/rss/health",
+    "category": "Health"
+  },
+  {
+    "name": "CBS News MoneyWatch",
+    "url": "https://www.cbsnews.com/latest/rss/moneywatch",
+    "category": "Economy"
+  },
+  {
+    "name": "CBS News Science",
+    "url": "https://www.cbsnews.com/latest/rss/science",
+    "category": "Science"
+  },
+  {
+    "name": "CBS News Technology",
+    "url": "https://www.cbsnews.com/latest/rss/technology",
+    "category": "Technology"
+  },
+  {
+    "name": "CBS News Entertainment",
+    "url": "https://www.cbsnews.com/latest/rss/entertainment",
+    "category": "Entertainment"
+  },
+  {
+    "name": "CBS News Space",
+    "url": "https://www.cbsnews.com/latest/rss/space",
+    "category": "Science"
+  },
+  {
+    "name": "CBS News Investigates",
+    "url": "https://www.cbsnews.com/latest/rss/evening-news/cbs-news-investigates",
+    "category": "News"
+  },
+  {
+    "name": "CBS Mornings Clips",
+    "url": "https://www.cbsnews.com/latest/rss/cbs-mornings-clips",
+    "category": "News"
+  },
+  {
+    "name": "CBS Mornings Full Episodes",
+    "url": "https://www.cbsnews.com/latest/rss/cbs-mornings-cbs-mornings-plus-full-episodes",
+    "category": "News"
+  },
+  {
+    "name": "CBS Evening News",
+    "url": "https://www.cbsnews.com/latest/rss/evening-news",
+    "category": "News"
+  },
+  {
+    "name": "CBS Evening News Full Episodes",
+    "url": "https://www.cbsnews.com/latest/rss/cbs-evening-news-plus-full-episodes",
+    "category": "News"
+  },
+  {
+    "name": "CBS Evening News On The Road",
+    "url": "https://www.cbsnews.com/latest/rss/evening-news-on-the-road",
+    "category": "News"
+  },
+  {
+    "name": "CBS 60 Minutes",
+    "url": "https://www.cbsnews.com/latest/rss/60-minutes",
+    "category": "News"
+  },
+  {
+    "name": "CBS Sunday Morning",
+    "url": "https://www.cbsnews.com/latest/rss/sunday-morning",
+    "category": "News"
+  },
+  {
+    "name": "CBS Face The Nation",
+    "url": "https://www.cbsnews.com/latest/rss/face-the-nation",
+    "category": "Politics"
+  },
+  {
+    "name": "CBS 48 Hours",
+    "url": "https://www.cbsnews.com/latest/rss/48-hours",
+    "category": "News"
+  },
+  {
+    "name": "CBS Reports Custom",
+    "url": "https://www.cbsnews.com/latest/rss/cbs-reports-custom",
+    "category": "News"
+  },
+  {
+    "name": "CBS News Mornings Clips",
+    "url": "https://www.cbsnews.com/latest/rss/cbs-news-mornings-clips",
+    "category": "News"
+  },
+  {
+    "name": "CBS America Decides Segments",
+    "url": "https://www.cbsnews.com/latest/rss/america-decides-segments",
+    "category": "Politics"
+  },
+  {
+    "name": "CBS Daily Report Clips",
+    "url": "https://www.cbsnews.com/latest/rss/daily-report-clips",
+    "category": "News"
+  },
+  {
+    "name": "CBS The Takeout Full Episodes",
+    "url": "https://www.cbsnews.com/latest/rss/the-takeout-full-episodes",
+    "category": "Politics"
+  },
+  {
+    "name": "CBS Uplift Full Episodes",
+    "url": "https://www.cbsnews.com/latest/rss/uplift-full-episodes",
+    "category": "General"
+  },
+  {
+    "name": "CBS Eye on America Full Episodes",
+    "url": "https://www.cbsnews.com/latest/rss/eye-on-america-full-episodes",
+    "category": "News"
+  },
+  {
+    "name": "CBS The Dish Full Episodes",
+    "url": "https://www.cbsnews.com/latest/rss/the-dish-full-episodes",
+    "category": "General"
+  },
+  {
+    "name": "Coconuts Jakarta",
+    "url": "http://coconuts.co/jakarta/feed/",
+    "category": "News"
+  },
+  {
+    "name": "Detik News",
+    "url": "https://news.detik.com/berita/rss",
+    "category": "News"
+  },
+  {
+    "name": "Detik Finance",
+    "url": "https://finance.detik.com/rss",
+    "category": "Economy"
+  },
+  {
+    "name": "Kompas Social",
+    "url": "https://rss.kompas.com/api/feed/social?apikey=bc58c81819dff4b8d5c53540a2fc7ffd83e6314a",
+    "category": "News"
+  },
+  {
+    "name": "Kontan Keuangan",
+    "url": "https://rss.kontan.co.id/news/keuangan",
+    "category": "Economy"
+  },
+  {
+    "name": "Kontan Nasional",
+    "url": "https://rss.kontan.co.id/news/nasional",
+    "category": "News"
+  },
+  {
+    "name": "Suara Bisnis",
+    "url": "https://www.suara.com/rss/bisnis",
+    "category": "Business"
+  },
+  {
+    "name": "Suara News",
+    "url": "https://www.suara.com/rss/news",
+    "category": "News"
+  },
+  {
+    "name": "Vice Indonesia",
+    "url": "https://www.vice.com/id_id/rss",
+    "category": "News"
+  },
+  {
+    "name": "Liputan6 News",
+    "url": "https://feed.liputan6.com/rss/news",
+    "category": "News"
+  },
+  {
+    "name": "Tempo Nasional",
+    "url": "http://rss.tempo.co/nasional",
+    "category": "News"
+  },
+  {
+    "name": "Tempo Bisnis",
+    "url": "http://rss.tempo.co/bisnis",
+    "category": "Business"
+  },
+  {
+    "name": "CNN Indonesia Ekonomi",
+    "url": "https://www.cnnindonesia.com/ekonomi/rss",
+    "category": "Economy"
+  },
+  {
+    "name": "CNN Indonesia Nasional",
+    "url": "https://www.cnnindonesia.com/nasional/rss",
+    "category": "News"
+  },
+  {
+    "name": "CNBC Indonesia News",
+    "url": "https://www.cnbcindonesia.com/news/rss",
+    "category": "News"
+  },
+  {
+    "name": "CNBC Indonesia Market",
+    "url": "https://www.cnbcindonesia.com/market/rss/",
+    "category": "Economy"
+  },
+  {
+    "name": "Republika",
+    "url": "https://www.republika.co.id/rss",
+    "category": "News"
+  },
+  {
+    "name": "Media Indonesia",
+    "url": "https://mediaindonesia.com/feed",
+    "category": "News"
+  },
+  {
+    "name": "Jawa Pos Nasional",
+    "url": "https://www.jawapos.com/nasional/rss",
+    "category": "News"
+  },
+  {
+    "name": "Jawa Pos Ekonomi",
+    "url": "https://www.jawapos.com/ekonomi/rss",
+    "category": "Economy"
+  },
+  {
+    "name": "Kumparan",
+    "url": "https://lapi.kumparan.com/v2.0/rss/",
+    "category": "News"
+  },
+  {
+    "name": "Tirto",
+    "url": "https://tirto.id/sitemap/r/google-discover",
+    "category": "News"
+  },
+  {
+    "name": "NYT Small Business",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml",
+    "category": "Business"
+  },
+  {
+    "name": "NYT Economy",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml",
+    "category": "Economy"
+  },
+  {
+    "name": "NYT Dealbook",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/Dealbook.xml",
+    "category": "Business"
+  },
+  {
+    "name": "BBC News - Top Stories",
+    "url": "https://feeds.bbci.co.uk/news/rss.xml",
+    "category": "General News"
+  },
+  {
+    "name": "CNN - Top Stories",
+    "url": "http://rss.cnn.com/rss/edition.rss",
+    "category": "General News"
+  },
+  {
+    "name": "Reuters - World News",
+    "url": "http://feeds.reuters.com/Reuters/worldNews",
+    "category": "General News"
+  },
+  {
+    "name": "The Guardian - World",
+    "url": "https://www.theguardian.com/world/rss",
+    "category": "General News"
+  },
+  {
+    "name": "Al Jazeera - All News",
+    "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    "category": "General News"
+  },
+  {
+    "name": "NPR News - Top Stories",
+    "url": "https://feeds.npr.org/1001/rss.xml",
+    "category": "General News"
+  },
+  {
+    "name": "NY Times - Home Page",
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+    "category": "General News"
+  },
+  {
+    "name": "TechCrunch - Top Stories",
+    "url": "http://feeds.feedburner.com/TechCrunch/",
+    "category": "Technology"
+  },
+  {
+    "name": "WIRED - Top Stories",
+    "url": "https://www.wired.com/feed/rss",
+    "category": "Technology"
+  },
+  {
+    "name": "The Verge - All Content",
+    "url": "https://www.theverge.com/rss/index.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "Hacker News (Y Combinator)",
+    "url": "https://news.ycombinator.com/rss",
+    "category": "Technology"
+  },
+  {
+    "name": "Engadget - All",
+    "url": "https://www.engadget.com/rss.xml",
+    "category": "Technology"
+  },
+  {
+    "name": "Bloomberg - Top News",
+    "url": "https://www.bloomberg.com/feeds/bpol/news.xml",
+    "category": "Business"
+  },
+  {
+    "name": "Forbes - Business",
+    "url": "https://www.forbes.com/business/feed/",
+    "category": "Business"
+  },
+  {
+    "name": "The Economist - Latest",
+    "url": "https://www.economist.com/latest/rss.xml",
+    "category": "Economy"
+  },
+  {
+    "name": "NASA - Breaking News",
+    "url": "https://www.nasa.gov/rss/dyn/breaking_news.rss",
+    "category": "Science"
+  },
+  {
+    "name": "Scientific American - All",
+    "url": "https://www.scientificamerican.com/feed/",
+    "category": "Science"
+  },
+  {
+    "name": "Nature - Current Issue",
+    "url": "https://www.nature.com/nature.rss",
+    "category": "Science"
+  },
+  {
+    "name": "WHO - News",
+    "url": "https://www.who.int/feeds/entity/mediacentre/news/en/rss.xml",
+    "category": "Health"
+  },
+  {
+    "name": "Medical News Today - All News",
+    "url": "https://www.medicalnewstoday.com/rss",
+    "category": "Health"
+  },
+  {
+    "name": "BBC Sport - Top Stories",
+    "url": "https://feeds.bbci.co.uk/sport/rss.xml",
+    "category": "Sports"
+  },
+  {
+    "name": "ESPN - Top Headlines",
+    "url": "http://www.espn.com/espn/rss/news",
+    "category": "Sports"
+  },
+  {
+    "name": "Variety - All Content",
+    "url": "https://variety.com/feed/",
+    "category": "Entertainment"
+  },
+  {
+    "name": "Rolling Stone - Music News",
+    "url": "https://www.rollingstone.com/music/music-news/feed/",
+    "category": "Entertainment"
+  },
+  {
+    "name": "ANTARA News (English) - Latest Indonesia News",
+    "url": "https://en.antaranews.com/rss/news.xml",
+    "category": "News"
+  },
+  {
+    "name": "SINDOnews",
+    "url": "https://www.sindonews.com/feed",
+    "category": "News"
+  },
+  {
+    "name": "Ringkasan Pasar",
+    "url": "https://id.investing.com/rss/market_overview.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Ringkasan Pasar - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/market_overview_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Ringkasan Pasar - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/market_overview_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Ringkasan Pasar - Opini",
+    "url": "https://id.investing.com/rss/market_overview_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Ringkasan Pasar - Ide Investasi",
+    "url": "https://id.investing.com/rss/market_overview_investing_ideas.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Mata Uang Kripto",
+    "url": "https://id.investing.com/rss/302.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Forex",
+    "url": "https://id.investing.com/rss/forex.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Forex - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/forex_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Forex - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/forex_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Forex - Opini",
+    "url": "https://id.investing.com/rss/forex_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Forex - Sinyal",
+    "url": "https://id.investing.com/rss/forex_Signals.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa Terpopuler",
+    "url": "https://id.investing.com/rss/286.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Pilihan Editor",
+    "url": "https://id.investing.com/rss/290.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham",
+    "url": "https://id.investing.com/rss/stock.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/stock_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/stock_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Opini",
+    "url": "https://id.investing.com/rss/stock_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Pilihan Saham",
+    "url": "https://id.investing.com/rss/stock_stock_picks.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Analisis Saham",
+    "url": "https://id.investing.com/rss/stock_Stocks.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Analisis Indeks",
+    "url": "https://id.investing.com/rss/stock_Indices.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Futures",
+    "url": "https://id.investing.com/rss/stock_Futures.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Pasar Saham - Analisis Opsi",
+    "url": "https://id.investing.com/rss/stock_Options.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas",
+    "url": "https://id.investing.com/rss/commodities.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/commodities_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/commodities_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Opini",
+    "url": "https://id.investing.com/rss/commodities_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Strategi",
+    "url": "https://id.investing.com/rss/commodities_Strategy.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Analisis Logam",
+    "url": "https://id.investing.com/rss/commodities_Metals.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Analisis Energi",
+    "url": "https://id.investing.com/rss/commodities_Energy.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Analisa & Opini Komoditas - Analisis Agrikultur",
+    "url": "https://id.investing.com/rss/commodities_Agriculture.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Ringkasan Pasar",
+    "url": "https://id.investing.com/rss/market_overview.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Ringkasan Pasar - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/market_overview_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Ringkasan Pasar - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/market_overview_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Ringkasan Pasar - Opini",
+    "url": "https://id.investing.com/rss/market_overview_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Ringkasan Pasar - Ide Investasi",
+    "url": "https://id.investing.com/rss/market_overview_investing_ideas.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Mata Uang Kripto",
+    "url": "https://id.investing.com/rss/302.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Forex",
+    "url": "https://id.investing.com/rss/forex.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Forex - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/forex_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Forex - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/forex_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Forex - Opini",
+    "url": "https://id.investing.com/rss/forex_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Forex - Sinyal",
+    "url": "https://id.investing.com/rss/forex_Signals.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa Terpopuler",
+    "url": "https://id.investing.com/rss/286.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Pilihan Editor",
+    "url": "https://id.investing.com/rss/290.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham",
+    "url": "https://id.investing.com/rss/stock.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/stock_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/stock_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Opini",
+    "url": "https://id.investing.com/rss/stock_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Pilihan Saham",
+    "url": "https://id.investing.com/rss/stock_stock_picks.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Analisis Saham",
+    "url": "https://id.investing.com/rss/stock_Stocks.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Analisis Indeks",
+    "url": "https://id.investing.com/rss/stock_Indices.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Futures",
+    "url": "https://id.investing.com/rss/stock_Futures.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Pasar Saham - Analisis Opsi",
+    "url": "https://id.investing.com/rss/stock_Options.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas",
+    "url": "https://id.investing.com/rss/commodities.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Analisis Teknikal",
+    "url": "https://id.investing.com/rss/commodities_Technical.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Analisis Fundamental",
+    "url": "https://id.investing.com/rss/commodities_Fundamental.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Opini",
+    "url": "https://id.investing.com/rss/commodities_Opinion.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Strategi",
+    "url": "https://id.investing.com/rss/commodities_Strategy.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Analisis Logam",
+    "url": "https://id.investing.com/rss/commodities_Metals.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Analisis Energi",
+    "url": "https://id.investing.com/rss/commodities_Energy.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Komoditas - Analisis Agrikultur",
+    "url": "https://id.investing.com/rss/commodities_Agriculture.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Rating Analis Saham",
+    "url": "https://id.investing.com/rss/news_1061.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Laporan Laba dan Desas-Desus",
+    "url": "https://id.investing.com/rss/news_1062.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Transkrip Laporan Laba",
+    "url": "https://id.investing.com/rss/news_1063.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Pelaporan SEC",
+    "url": "https://id.investing.com/rss/news_1064.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Ide Investasi Pasar Saham",
+    "url": "https://id.investing.com/rss/news_1065.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Mata Uang Kripto",
+    "url": "https://id.investing.com/rss/news_301.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Perusahaan",
+    "url": "https://id.investing.com/rss/news_356.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Insider Trading",
+    "url": "https://id.investing.com/rss/news_357.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Breaking News",
+    "url": "https://id.investing.com/rss/news_462.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Forex",
+    "url": "https://id.investing.com/rss/news_1.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Terpopuler",
+    "url": "https://id.investing.com/rss/news_285.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Finansial Terkini",
+    "url": "https://id.investing.com/rss/news_477.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Komoditas & Berjangka",
+    "url": "https://id.investing.com/rss/news_11.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Pasar Saham",
+    "url": "https://id.investing.com/rss/news_25.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Indikator Ekonomi",
+    "url": "https://id.investing.com/rss/news_95.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Indonesia",
+    "url": "https://id.investing.com/rss/news_12.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Ekonomi",
+    "url": "https://id.investing.com/rss/news_14.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "Investing.com - Berita Dunia",
+    "url": "https://id.investing.com/rss/news_287.rss",
+    "category": "Investasi"
+  },
+  {
+    "name": "MarketWatch - Top Stories",
+    "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+    "category": "Investasi"
+  },
+  {
+    "name": "MarketWatch - Real-Time Headlines",
+    "url": "https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines",
+    "category": "Investasi"
+  },
+  {
+    "name": "MarketWatch - Bulletins",
+    "url": "http://feeds.marketwatch.com/marketwatch/bulletins?_gl=1*1xt4u18*_gcl_au*MTYyNTgwMDYxOC4xNzU5Nzc3OTg2*_ga*MTI4OTA5MDgwMS4xNzU5Nzc3OTg3*_ga_K2H7B9JRSS*czE3NTk3Nzc5ODYkbzEkZzEkdDE3NTk3NzgwMDgkajM4JGwwJGgxMTc2ODE3NDU3",
+    "category": "Investasi"
+  },
+  {
+    "name": "MarketWatch - Market Pulse",
+    "url": "https://feeds.content.dowjones.io/public/rss/mw_marketpulse",
+    "category": "Investasi"
+  },
+  {
+    "name": "Cointelegraph - Semua Berita",
+    "url": "https://cointelegraph.com/rss",
+    "category": "Crypto"
+  },
+  {
+    "name": "Cointelegraph - Bitcoin News",
+    "url": "https://cointelegraph.com/rss/tags/bitcoin",
+    "category": "Crypto"
+  },
+  {
+    "name": "Cointelegraph - Altcoin News",
+    "url": "https://cointelegraph.com/rss/tags/altcoin",
+    "category": "Crypto"
+  },
+  
+  {
+    "name": "CoinDesk - Berita Utama",
+    "url": "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml",
+    "category": "Crypto"
+  },
+  
+  {
+    "name": "The Block - Berita Terbaru",
+    "url": "https://www.theblock.co/rss.xml",
+    "category": "Crypto"
+  },
+
+  {
+    "name": "CCN - Semua Crypto Feeds",
+    "url": "https://www.ccn.com/rss-feeds/crypto/",
+    "category": "Crypto"
+  },
+  {
+    "name": "CCN - Crypto News",
+    "url": "https://www.ccn.com/news/crypto-news/feeds/",
+    "category": "Crypto"
+  },
+  {
+    "name": "CCN - Crypto Analysis",
+    "url": "https://www.ccn.com/analysis/crypto-analysis/feeds/",
+    "category": "Crypto Analisis"
+  },
+
+  {
+    "name": "Pintu News - Artikel Terbaru",
+    "url": "https://pintu.co.id/news/rss-feed.xml",
+    "category": "Crypto Indonesia"
+  },
+  {
+    "name": "Pintu News - Bitcoin",
+    "url": "https://pintu.co.id/news/categories/bitcoin/rss-feed.xml",
+    "category": "Crypto Indonesia"
+  },
+  {
+    "name": "Pintu News - Altcoin",
+    "url": "https://pintu.co.id/news/categories/altcoin/rss-feed.xml",
+    "category": "Crypto Indonesia"
+  },
+  {
+    "name": "Pintu News - Market",
+    "url": "https://pintu.co.id/news/categories/market/rss-feed.xml",
+    "category": "Crypto Indonesia"
+  },
+  
+
+  {
+    "name": "Crypto Potato",
+    "url": "https://cryptopotato.com/feed/",
+    "category": "Crypto"
+  },
+  {
+    "name": "CryptoSlate",
+    "url": "https://cryptoslate.com/feed/",
+    "category": "Crypto"
+  },
+  {
+    "name": "Decrypt - Berita Utama",
+    "url": "https://decrypt.co/feed",
+    "category": "Crypto"
+  },
+  {
+    "name": "Investing.com - Analisa & Opini Mata Uang Kripto",
+    "url": "https://id.investing.com/rss/302.rss",
+    "category": "Investasi Crypto"
+  },
+  {
+    "name": "Investing.com - Berita Mata Uang Kripto",
+    "url": "https://id.investing.com/rss/news_301.rss",
+    "category": "Investasi Crypto"
+  }
+  
+]
+
+
