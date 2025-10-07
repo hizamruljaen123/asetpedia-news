@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import DOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
+import { decode as decodeHtml } from 'he'
 
 interface RSSFeed {
   name: string
@@ -20,17 +21,21 @@ interface NewsItem {
   img?: string
 }
 
+const HTML_ENTITY_PATTERN = /&(?:[a-zA-Z]+|#\d+|#x[a-fA-F0-9]+);/
+
 const decodeHtmlEntities = (value: string) => {
   if (!value) return value
 
-  return value
-    .replace(/&#x27;|&#39;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&#x2F;/g, '/')
+  let decoded = decodeHtml(value)
+
+  // Handle double-encoded entities like &amp;#8217;
+  while (HTML_ENTITY_PATTERN.test(decoded)) {
+    const nextDecoded = decodeHtml(decoded)
+    if (nextDecoded === decoded) break
+    decoded = nextDecoded
+  }
+
+  return decoded
 }
 
 const ONE_HOUR_MS = 60 * 60 * 1000
@@ -59,12 +64,18 @@ const detectFeedFormat = (xml: string): FeedFormat => {
   return 'unknown'
 }
 
-const stripCData = (value: string) => value.replace(/<!\[CDATA\(([\s\S]*?)\)\]\]>/g, '$1').replace(/<!\[CDATA\[(\s\S*?)\]\]>/g, '$1')
+const stripCData = (value: string) => {
+  return value
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/<!\[CDATA\(([\s\S]*?)\)\]\]>/g, '$1')
+    .replace(/]]>/g, '')
+}
 
 const sanitizeText = (value?: string) => {
   if (!value) return undefined
   const cleaned = stripCData(value).replace(/<[^>]*>/g, '').trim()
-  return cleaned ? decodeHtmlEntities(cleaned) : undefined
+  const decoded = cleaned ? decodeHtmlEntities(cleaned) : undefined
+  return decoded && decoded.length > 0 ? decoded : undefined
 }
 
 const getCacheTimestamp = (file: string): number | null => {
@@ -197,6 +208,15 @@ async function fetchRSSFeed(feed: RSSFeed, timeout = 10000): Promise<NewsItem[]>
 const saveNewsByCategory = async (newsItems: NewsItem[], timestamp: number) => {
   const cacheDir = path.join(process.cwd(), 'cache')
   await fs.mkdir(cacheDir, { recursive: true })
+
+  try {
+    const entries = await fs.readdir(cacheDir)
+    await Promise.all(
+      entries.map(entry => fs.rm(path.join(cacheDir, entry), { recursive: true, force: true }))
+    )
+  } catch (error) {
+    console.error('Error clearing cache directory:', error)
+  }
 
   // Group news by category
   const newsByCategory: { [key: string]: NewsItem[] } = {}

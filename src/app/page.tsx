@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Terminal, RefreshCw, Activity, Database, Globe, ArrowRight, Search } from 'lucide-react'
+import { decode as decodeHtml } from 'he'
 import './terminal.css'
 
 interface NewsItem {
@@ -84,6 +85,61 @@ const CATEGORY_ACCENT_COLORS: { [key: string]: string } = {
   'INVESTASI': '#f59e0b',
   'CRYPTO': '#8b5cf6'
 }
+
+const decodeHtmlEntities = (value?: string | null) => {
+  if (!value) return ''
+  return decodeHtml(value)
+}
+
+const formatDescription = (description?: string | null) => {
+  if (!description) return undefined
+
+  const stripped = description
+    .replace(/<\/?p[^>]*>/g, ' ')
+    .replace(/<img[^>]*>/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+
+  const decoded = decodeHtmlEntities(stripped)
+  const normalized = decoded.replace(/\s+/g, ' ').trim()
+
+  if (!normalized) return undefined
+
+  return normalized.length > 200 ? `${normalized.slice(0, 200)}...` : normalized
+}
+
+const groupNewsByDate = (items: NewsItem[]) => {
+  const groups = new Map<string, { key: string; label: string; items: NewsItem[] }>()
+
+  items.forEach(item => {
+    const date = new Date(item.pubDate)
+    const isValidDate = !Number.isNaN(date.getTime())
+    const label = isValidDate
+      ? date.toLocaleDateString('id-ID', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })
+      : 'Tanggal tidak diketahui'
+
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Jakarta',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    })
+
+    const key = isValidDate ? formatter.format(date) : 'unknown'
+
+    if (!groups.has(key)) {
+      groups.set(key, { key, label, items: [] })
+    }
+
+    groups.get(key)!.items.push(item)
+  })
+
+  return Array.from(groups.values())
+}
 export default function BloombergTerminal() {
   const [newsSources, setNewsSources] = useState<RSSFeed[]>([])
   const [news, setNews] = useState<NewsItem[]>([])
@@ -97,10 +153,12 @@ export default function BloombergTerminal() {
 
   const filteredNews = useMemo(() => {
     const selectedCategoryKey = selectedCategory.toUpperCase()
-    return news.filter(item => {
-      const itemCategoryKey = (item.category || 'ALL').toUpperCase()
-      return selectedCategoryKey === 'ALL' || itemCategoryKey === selectedCategoryKey
-    })
+    return news
+      .filter(item => {
+        const itemCategoryKey = (item.category || 'ALL').toUpperCase()
+        return selectedCategoryKey === 'ALL' || itemCategoryKey === selectedCategoryKey
+      })
+      .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
   }, [news, selectedCategory])
 
   const groupedNews = useMemo(() => {
@@ -293,74 +351,86 @@ export default function BloombergTerminal() {
     </div>
   )
 
-  const NewsList = ({ category, items }: { category: string; items: NewsItem[] }) => (
-    <section className={`rounded-xl border ${CATEGORY_BG_COLORS[(category || 'ALL').toUpperCase()]} mb-6 shadow-sm`}>
-      <div
-        className="category-header flex items-center justify-between px-4 py-3 border-b"
-        style={{ borderColor: CATEGORY_ACCENT_COLORS[(category || 'ALL').toUpperCase()] }}
-      >
-        <h3 className={`font-semibold terminal-text tracking-wide ${CATEGORY_COLORS[(category || 'ALL').toUpperCase()]}`}>
-          {category}
-        </h3>
-        <span className="text-xs text-slate-500 terminal-text">
-          {items.length} ARTICLES
-        </span>
-      </div>
-      <div className="grid gap-4 p-4 md:grid-cols-3">
-        {items.map((item, index) => {
-          const newsKey = `${item.link}-${item.pubDate}-${index}`
-          const isSelected = filteredNews[selectedNewsIndex]?.link === item.link
+  const NewsList = ({ category, items }: { category: string; items: NewsItem[] }) => {
+    const dateGroups = groupNewsByDate(items)
 
-          return (
-            <article
-              key={newsKey}
-              className={`news-item rounded-lg border border-slate-200 bg-white p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer ${
-                isSelected ? 'ring-2 ring-slate-300' : ''
-              }`}
-              onClick={() => window.open(item.link, '_blank')}
-              onMouseEnter={() => {
-                const index = filteredNews.findIndex(
-                  newsItem => newsItem.link === item.link && newsItem.title === item.title
-                )
-
-                if (index !== -1) {
-                  setSelectedNewsIndex(index)
-                }
-              }}
-            >
-              <div className="flex items-center justify-between text-xs text-slate-500">
-                <span className="font-semibold tracking-wide">
-                  {item.source.toUpperCase()}
+    return (
+      <section className={`rounded-xl border ${CATEGORY_BG_COLORS[(category || 'ALL').toUpperCase()]} mb-6 shadow-sm`}>
+        <div
+          className="category-header flex items-center justify-between px-4 py-3 border-b"
+          style={{ borderColor: CATEGORY_ACCENT_COLORS[(category || 'ALL').toUpperCase()] }}
+        >
+          <h3 className={`font-semibold terminal-text tracking-wide ${CATEGORY_COLORS[(category || 'ALL').toUpperCase()]}`}>
+            {category}
+          </h3>
+          <span className="text-xs text-slate-500 terminal-text">
+            {items.length} ARTICLES
+          </span>
+        </div>
+        <div className="p-4 space-y-6">
+          {dateGroups.map(({ key, label, items: dateItems }) => (
+            <div key={`${category}-${key}`} className="space-y-4">
+              <div className="flex items-center text-xs text-slate-500 uppercase tracking-wide">
+                <div className="flex-1 h-px bg-slate-200" />
+                <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-semibold">
+                  {label}
                 </span>
-                <span>{formatTime(item.pubDate)}</span>
+                <div className="flex-1 h-px bg-slate-200" />
               </div>
-              <h4 className="mt-1 text-sm font-semibold text-slate-800 leading-snug">
-                {item.title}
-              </h4>
-              {item.description && (
-                <div 
-                  className="mt-1 text-sm text-slate-600 leading-relaxed prose prose-sm max-w-none"
-                  dangerouslySetInnerHTML={{ 
-                    __html: item.description
-                      .replace(/<\/?p[^>]*>/g, '') // Remove <p> tags
-                      .replace(/<img[^>]*>/g, '') // Remove images
-                      .replace(/<[^>]+>/g, '') // Remove all other HTML tags
-                      .replace(/&[^;]+;/g, '') // Remove HTML entities
-                      .substring(0, 200) // Limit length
-                      .trim() + (item.description.length > 200 ? '...' : '')
-                  }} 
-                />
-              )}
-              <div className="mt-2 flex items-center text-sm font-medium text-slate-500">
-                <span>Baca selengkapnya</span>
-                <ArrowRight className="ml-2 h-4 w-4 text-slate-400" />
+              <div className="grid gap-4 md:grid-cols-3">
+                {dateItems.map((item, index) => {
+                  const newsKey = `${item.link}-${item.pubDate}-${index}`
+                  const isSelected = filteredNews[selectedNewsIndex]?.link === item.link
+                  const decodedTitle = decodeHtmlEntities(item.title).trim()
+                  const formattedDescription = formatDescription(item.description)
+
+                  return (
+                    <article
+                      key={newsKey}
+                      className={`news-item rounded-lg border border-slate-200 bg-white p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer ${
+                        isSelected ? 'ring-2 ring-slate-300' : ''
+                      }`}
+                      onClick={() => window.open(item.link, '_blank')}
+                      onMouseEnter={() => {
+                        const index = filteredNews.findIndex(
+                          newsItem => newsItem.link === item.link && newsItem.title === item.title
+                        )
+
+                        if (index !== -1) {
+                          setSelectedNewsIndex(index)
+                        }
+                      }}
+                    >
+                      <div className="flex items-center justify-between text-xs text-slate-500">
+                        <span className="font-semibold tracking-wide">
+                          {item.source.toUpperCase()}
+                        </span>
+                        <span>{formatTime(item.pubDate)}</span>
+                      </div>
+                      {decodedTitle && (
+                        <h4 className="mt-1 text-sm font-semibold text-slate-800 leading-snug">
+                          {decodedTitle}
+                        </h4>
+                      )}
+                      {formattedDescription && (
+                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
+                          {formattedDescription}
+                        </p>
+                      )}
+                      <div className="mt-2 flex items-center text-sm font-medium text-slate-500">
+                        <span>Baca selengkapnya</span>
+                        <ArrowRight className="ml-2 h-4 w-4 text-slate-400" />
+                      </div>
+                    </article>
+                  )
+                })}
               </div>
-            </article>
-          )
-        })}
-      </div>
-    </section>
-  )
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   const StatusBar = () => (
     <div className="status-bar px-4 py-2">
