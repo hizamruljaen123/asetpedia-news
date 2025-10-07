@@ -1,0 +1,5 @@
+ACCESS_KEY = 112HPA3FIMQSDSD2Z23Q
+SECRET_KEY = 8Nh1QbARDpa0HbBCDXQ7tP0M6uh8r5ikgQZyAWqf
+SERVER = is3.cloudhost.id
+NAME = pantaoumedia
+PATH = /asetpedia-news/

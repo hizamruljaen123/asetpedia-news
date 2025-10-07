@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,6 +14,23 @@ interface NewsItem {
   category: string
   description?: string
   img?: string
+}
+
+export default function SearchResultsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-50 text-slate-900 terminal-text">
+          <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center px-4 py-8 text-slate-500">
+            <Search className="mb-2 h-6 w-6" />
+            <span className="text-sm">Loading search page...</span>
+          </div>
+        </div>
+      }
+    >
+      <SearchResultsContent />
+    </Suspense>
+  )
 }
 
 const formatTime = (dateString: string) => {
@@ -31,7 +48,7 @@ const formatTime = (dateString: string) => {
 
 const PAGE_SIZE = 50
 
-export default function SearchResultsPage() {
+function SearchResultsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const query = searchParams.get('query')?.trim() ?? ''
