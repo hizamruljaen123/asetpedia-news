@@ -1,13 +1,13 @@
-# 🖥️ BLOOMBERG TERMINAL - Professional News Terminal Interface
+# 🖥️ Assetpedia News - Professional News Terminal Interface
 
-Portal berita profesional dengan style terminal Bloomberg yang menampilkan judul berita dalam bentuk list yang dipisahkan berdasarkan kategori.
+Portal berita profesional dengan style terminal news  yang menampilkan judul berita dalam bentuk list yang dipisahkan berdasarkan kategori.
 
 ## ✨ Fitur Utama
 
-### 🎨 **Bloomberg Terminal Style**
+### 🎨 **news  Terminal Style**
 - **Font JetBrains Mono** - Font monospace profesional yang khas
 - **Green Terminal Theme** - Warna hijau terminal klasik dengan efek glow
-- **Professional Layout** - Layout yang terinspirasi dari Bloomberg Terminal
+- **Professional Layout** - Layout yang terinspirasi dari news  Terminal
 - **Real-time Clock** - Jam real-time dengan format profesional
 - **Status Indicators** - Indikator sistem yang menunjukkan status online
 
