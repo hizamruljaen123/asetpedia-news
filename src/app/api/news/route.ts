@@ -351,14 +351,23 @@ export async function GET(request: NextRequest) {
     console.log('Cache miss or update forced, fetching fresh data...')
     
     // Fetch RSS feeds from JSON file
+    const defaultFeedsUrl = process.env.NEXT_PUBLIC_APP_URL
+      ? new URL('/rss_feeds.json', process.env.NEXT_PUBLIC_APP_URL).href
+      : 'http://localhost:3001/rss_feeds.json'
+
+    const feedsUrl =
+      process.env.RSS_FEEDS_URL ??
+      process.env.NEXT_PUBLIC_RSS_FEEDS_URL ??
+      defaultFeedsUrl
+
     let RSS_FEEDS: RSSFeed[] = []
     try {
-      const feedsResponse = await fetch('http://localhost:3001/rss_feeds.json')
+      const feedsResponse = await fetch(feedsUrl)
       if (!feedsResponse.ok) {
         throw new Error(`Failed to fetch RSS feeds: ${feedsResponse.status}`)
       }
       RSS_FEEDS = await feedsResponse.json()
-      console.log(`Fetched ${RSS_FEEDS.length} RSS feeds from JSON`)
+      console.log(`Fetched ${RSS_FEEDS.length} RSS feeds from JSON (${feedsUrl})`)
     } catch (error) {
       console.error('Error fetching RSS feeds JSON:', error)
       console.log('Using empty RSS feeds list')
@@ -405,24 +414,6 @@ export async function GET(request: NextRequest) {
       return allNews
     }
     
-    // Fetch RSS feeds from JSON file
-    try {
-      const feedsResponse = await fetch('http://localhost:3001/rss_feeds.json')
-      if (!feedsResponse.ok) {
-        throw new Error(`Failed to fetch RSS feeds: ${feedsResponse.status}`)
-      }
-      RSS_FEEDS = await feedsResponse.json()
-      console.log(`Fetched ${RSS_FEEDS.length} RSS feeds from JSON`)
-    } catch (error) {
-      console.error('Error fetching RSS feeds JSON:', error)
-      console.log('Using empty RSS feeds list')
-      return respondWithJson(request, [], {
-        headers: {
-          'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-        },
-      })
-    }
-
     // Create cache directory if it doesn't exist
     const cacheDir = path.join(process.cwd(), 'cache')
     await fs.mkdir(cacheDir, { recursive: true })
