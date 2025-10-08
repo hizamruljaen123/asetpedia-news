@@ -488,6 +488,9 @@ export async function GET(request: NextRequest) {
           'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
         },
       })
+    } catch (error) {
+      console.error('Error fetching news:', error)
+      return respondWithJson(request, [], {
         status: 500,
       })
     }
