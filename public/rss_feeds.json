@@ -1,4 +1,25 @@
 [
+  
+  {
+    "name": "NPR News - Top Stories",
+    "url": "https://feeds.npr.org/1001/rss.xml",
+    "category": "International"
+  },
+  {
+    "name": "Bloomberg - Berita Bisnis",
+    "url": "https://feeds.bloomberg.com/business/news.rss",
+    "category": "Business"
+  },
+  {
+    "name": "Bloomberg - Berita Teknologi",
+    "url": "https://feeds.bloomberg.com/technology/news.rss",
+    "category": "Technology"
+  },
+  {
+    "name": "Bloomberg - Berita Pasar (Markets)",
+    "url": "https://feeds.bloomberg.com/markets/news.rss",
+    "category": "Investasi"
+  },
   {
     "name": "NYT Small Business",
     "url": "https://rss.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml",
@@ -1050,6 +1071,13 @@
     "url": "https://id.investing.com/rss/news_301.rss",
     "category": "Investasi Crypto"
   }
+  ,
+  {
+    "name": "Investing.com - Berita Mata Uang Kripto",
+    "url": "https://id.investing.com/rss/news_301.rss",
+    "category": "Investasi Crypto"
+  },
+  
   
 ]
 

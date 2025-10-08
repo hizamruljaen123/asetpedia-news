@@ -333,77 +333,27 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const categoryParam = (searchParams.get('category') || 'ALL').toUpperCase()
     const update = searchParams.get('update') === 'true'
-    
-    // Check cache first if not forcing update
-    if (!update) {
-      const cache = await getLatestCategoryCache(categoryParam === 'ALL' ? 'all' : categoryParam)
-      const now = Date.now()
-      
-      if (cache && (now - cache.timestamp) <= ONE_HOUR_MS) {
-        console.log(`Using cached data for ${categoryParam} (${cache.data.length} items)`)
-        return respondWithJson(request, cache.data, {
-          headers: DEFAULT_RESPONSE_HEADERS,
-        })
-      }
-    }
+    const categoryKey = categoryParam === 'ALL' ? 'all' : categoryParam
+    const cache = await getLatestCategoryCache(categoryKey)
+    const now = Date.now()
+    const isCacheFresh = cache ? (now - cache.timestamp) <= ONE_HOUR_MS : false
 
-    // If we reach here, we need to fetch fresh data
-    console.log('Cache miss or update forced, fetching fresh data...')
-    
-    // Fetch RSS feeds from JSON file
-    const requestOrigin = (() => {
-      try {
-        return request.nextUrl?.origin
-      } catch (error) {
-        return undefined
-      }
-    })()
-
-    const defaultFeedsUrl = process.env.NEXT_PUBLIC_APP_URL
-      ? new URL('/rss_feeds.json', process.env.NEXT_PUBLIC_APP_URL).href
-      : requestOrigin
-        ? new URL('/rss_feeds.json', requestOrigin).href
-        : 'http://localhost:3000/rss_feeds.json'
-
-    const feedsUrl =
-      process.env.RSS_FEEDS_URL ??
-      process.env.NEXT_PUBLIC_RSS_FEEDS_URL ??
-      defaultFeedsUrl
-
-    let RSS_FEEDS: RSSFeed[] = []
-    try {
-      console.log(`Attempting to fetch RSS feed list from: ${feedsUrl}`)
-      const feedsResponse = await fetch(feedsUrl)
-      if (!feedsResponse.ok) {
-        throw new Error(`Failed to fetch RSS feeds: ${feedsResponse.status}`)
-      }
-      RSS_FEEDS = await feedsResponse.json()
-      console.log(`Fetched ${RSS_FEEDS.length} RSS feeds from JSON (${feedsUrl})`)
-    } catch (error) {
-      console.error(`Error fetching RSS feeds JSON from ${feedsUrl}:`, error)
-      console.log('Using empty RSS feeds list')
-      // Return empty news instead of error
-      return respondWithJson(request, [], {
-        headers: DEFAULT_RESPONSE_HEADERS,
-      })
-    }
-    
-    // Process feeds in batches with delay
     const processFeeds = async (feeds: RSSFeed[]) => {
       let allNews: NewsItem[] = []
       const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
       const BATCH_SIZE = 5
       const DELAY_BETWEEN_BATCHES = 2000 // 2 seconds
-      
+
       for (let i = 0; i < feeds.length; i += BATCH_SIZE) {
         const batch = feeds.slice(i, i + BATCH_SIZE)
-        console.log(`Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(feeds.length / BATCH_SIZE)} (${batch.length} feeds)`)
-        
-        // Process batch in parallel
+        console.log(
+          `Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(feeds.length / BATCH_SIZE)} (${batch.length} feeds)`
+        )
+
         const batchResults = await Promise.all(
           batch.map(async feed => {
             try {
-              const result = await fetchRSSFeed(feed, 15000) // 15 second timeout per feed
+              const result = await fetchRSSFeed(feed, 15000)
               console.log(`✅ Successfully fetched ${result.length} items from ${feed.name}`)
               return result
             } catch (error) {
@@ -412,90 +362,115 @@ export async function GET(request: NextRequest) {
             }
           })
         )
-        
+
         allNews = [...allNews, ...batchResults.flat()]
-        
-        // Add delay between batches if not the last batch
+
         if (i + BATCH_SIZE < feeds.length) {
           console.log(`Waiting ${DELAY_BETWEEN_BATCHES}ms before next batch...`)
           await delay(DELAY_BETWEEN_BATCHES)
         }
       }
-      
+
       return allNews
     }
-    
-    // Create cache directory if it doesn't exist
-    const cacheDir = path.join(process.cwd(), 'cache')
-    await fs.mkdir(cacheDir, { recursive: true })
-    
-    // Check if we have a recent cache for all categories
-    const allCategories = [...new Set(RSS_FEEDS.map(feed => feed.category.toUpperCase()))]
-    const timestamp = Date.now()
-    let allNews: NewsItem[] = []
-    let useCache = !update
 
-    if (useCache) {
-      const cacheChecks = await Promise.all(
-        allCategories.map(async category => {
-          const cache = await getLatestCategoryCache(category)
-          return cache && (timestamp - cache.timestamp) <= ONE_HOUR_MS
-        })
-      )
-      useCache = cacheChecks.every(Boolean)
-    }
+    const refreshAndCache = async (): Promise<NewsItem[]> => {
+      const requestOrigin = (() => {
+        try {
+          return request.nextUrl?.origin
+        } catch (error) {
+          return undefined
+        }
+      })()
 
-    if (useCache) {
-      console.log('Using cached data for all categories')
-      const cache = await getLatestCategoryCache(categoryParam === 'ALL' ? 'all' : categoryParam)
-      if (cache) {
-        return respondWithJson(request, cache.data, {
-          headers: {
-            'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-          },
-        })
+      const defaultFeedsUrl = process.env.NEXT_PUBLIC_APP_URL
+        ? new URL('/rss_feeds.json', process.env.NEXT_PUBLIC_APP_URL).href
+        : requestOrigin
+          ? new URL('/rss_feeds.json', requestOrigin).href
+          : 'http://localhost:3000/rss_feeds.json'
+
+      const feedsUrl =
+        process.env.RSS_FEEDS_URL ??
+        process.env.NEXT_PUBLIC_RSS_FEEDS_URL ??
+        defaultFeedsUrl
+
+      let RSS_FEEDS: RSSFeed[] = []
+      try {
+        console.log(`Attempting to fetch RSS feed list from: ${feedsUrl}`)
+        const feedsResponse = await fetch(feedsUrl)
+        if (!feedsResponse.ok) {
+          throw new Error(`Failed to fetch RSS feeds: ${feedsResponse.status}`)
+        }
+        RSS_FEEDS = await feedsResponse.json()
+        console.log(`Fetched ${RSS_FEEDS.length} RSS feeds from JSON (${feedsUrl})`)
+      } catch (error) {
+        console.error(`Error fetching RSS feeds JSON from ${feedsUrl}:`, error)
+        console.log('Unable to refresh news without feed definitions')
+        return []
       }
-    }
 
-    // If we get here, we need to fetch fresh data
-    console.log('Fetching all news feeds...')
-    try {
-      allNews = await processFeeds(RSS_FEEDS)
+      if (RSS_FEEDS.length === 0) {
+        console.log('RSS feed list is empty. Skipping refresh.')
+        return []
+      }
+
+      const timestamp = Date.now()
+      const allNews = await processFeeds(RSS_FEEDS)
 
       if (allNews.length === 0) {
-        console.log('No news items were fetched. Returning empty array.')
-        return respondWithJson(request, [], {
-          headers: {
-            'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-          },
-        })
+        console.log('No news items were fetched during refresh.')
+        return []
       }
 
-      // Sort by publication date (newest first)
       allNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
 
-      // Save to cache by category
-      console.log('Saving news to cache by category...')
+      console.log('Saving refreshed news to cache by category...')
       await saveNewsByCategory(allNews, timestamp)
 
-      // Filter by requested category if needed
-      let responseData = allNews
-      if (categoryParam !== 'ALL') {
-        responseData = allNews.filter(item => item.category?.toUpperCase() === categoryParam)
+      if (categoryParam === 'ALL') {
+        return allNews
       }
 
-      console.log(`Successfully fetched and cached ${responseData.length} news items`)
-      return respondWithJson(request, responseData, {
-        headers: {
-          'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-        },
-      })
-    } catch (error) {
-      console.error('Error fetching news:', error)
-      return respondWithJson(request, [], {
-        status: 500,
+      return allNews.filter(item => item.category?.toUpperCase() === categoryParam)
+    }
+
+    if (cache) {
+      const explain = update
+        ? 'Update requested; returning cached data and refreshing in background.'
+        : isCacheFresh
+          ? 'Using fresh cached data.'
+          : 'Cached data is stale; returning cached data and refreshing in background.'
+      console.log(`${explain} (${cache.data.length} items for ${categoryParam}).`)
+
+      if (update || !isCacheFresh) {
+        refreshAndCache()
+          .then(result => {
+            console.log(`Background refresh completed with ${result.length} items for ${categoryParam}.`)
+          })
+          .catch(error => {
+            console.error('Background refresh failed:', error)
+          })
+      }
+
+      return respondWithJson(request, cache.data, {
+        headers: DEFAULT_RESPONSE_HEADERS,
       })
     }
+
+    console.log('No cache available; fetching news before responding...')
+    const freshData = await refreshAndCache()
+
+    if (freshData.length === 0) {
+      console.log('No news items were fetched. Returning empty array.')
+      return respondWithJson(request, [], {
+        headers: DEFAULT_RESPONSE_HEADERS,
+      })
+    }
+
+    console.log(`Fetched and cached ${freshData.length} news items for ${categoryParam}.`)
+    return respondWithJson(request, freshData, {
+      headers: DEFAULT_RESPONSE_HEADERS,
+    })
   } catch (error) {
     console.error('Unhandled error in GET /api/news route:', error)
     return respondWithJson(request, [], {
