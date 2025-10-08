@@ -32,6 +32,8 @@ const getRssFeeds = async () => {
 
 const CATEGORIES = ['ALL', 'Business', 'Economy', 'Technology', 'Politics', 'World', 'News', 'Sports', 'Multimedia', 'General', 'Health', 'Science', 'Entertainment', 'Investasi', 'Crypto']
 
+const AUTO_REFRESH_INTERVAL_MS = 60 * 60 * 1000 // 1 hour
+
 const CATEGORY_COLORS: { [key: string]: string } = {
   'ALL': 'text-slate-600',
   'BUSINESS': 'text-yellow-600',
@@ -186,11 +188,13 @@ export default function BloombergTerminal() {
   useEffect(() => {
     fetchNews()
     fetchRssFeeds()
-    if (autoRefresh) {
-      const interval = setInterval(fetchNews, 30000) // Auto refresh every 30 seconds
-      return () => clearInterval(interval);
-    }
-  }, [autoRefresh]);
+  }, [])
+
+  useEffect(() => {
+    if (!autoRefresh) return
+    const interval = setInterval(fetchNews, AUTO_REFRESH_INTERVAL_MS)
+    return () => clearInterval(interval)
+  }, [autoRefresh])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -266,6 +270,12 @@ export default function BloombergTerminal() {
               <div className="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></div>
             </div>
           </div>
+          {loading && (
+            <div className="hidden md:flex items-center space-x-1 text-xs text-emerald-600">
+              <RefreshCw className="w-3 h-3 animate-spin" />
+              <span className="terminal-text">Memperbarui...</span>
+            </div>
+          )}
         </div>
         <div className="flex items-center space-x-4 text-xs text-slate-500">
           <Button
@@ -472,14 +482,7 @@ export default function BloombergTerminal() {
         <RefreshBar />
         
         <div className="flex-1 overflow-y-auto scrollbar-thin">
-          {loading ? (
-            <div className="flex items-center justify-center py-8">
-              <div className="flex items-center space-x-2 text-slate-500">
-                <RefreshCw className="w-4 h-4 animate-spin" />
-                <span className="terminal-text">Loading latest headlines from RSS feeds...</span>
-              </div>
-            </div>
-          ) : Object.keys(groupedNews).length > 0 ? (
+          {Object.keys(groupedNews).length > 0 ? (
             <div className="p-4">
               {Object.entries(groupedNews).map(([category, items]) => (
                 <NewsList key={category} category={category} items={items} />
@@ -487,7 +490,14 @@ export default function BloombergTerminal() {
             </div>
           ) : (
             <div className="flex items-center justify-center py-8">
-              <span className="text-slate-500 terminal-text">No news found for this filter.</span>
+              {loading ? (
+                <div className="flex items-center space-x-2 text-slate-500">
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <span className="terminal-text">Memuat berita terbaru...</span>
+                </div>
+              ) : (
+                <span className="text-slate-500 terminal-text">No news found for this filter.</span>
+              )}
             </div>
           )}
         </div>
