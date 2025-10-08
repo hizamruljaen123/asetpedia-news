@@ -363,7 +363,7 @@ export async function GET(request: NextRequest) {
       ? new URL('/rss_feeds.json', process.env.NEXT_PUBLIC_APP_URL).href
       : requestOrigin
         ? new URL('/rss_feeds.json', requestOrigin).href
-        : 'http://localhost:3001/rss_feeds.json'
+        : 'http://localhost:3000/rss_feeds.json'
 
     const feedsUrl =
       process.env.RSS_FEEDS_URL ??
