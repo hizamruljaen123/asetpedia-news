@@ -351,9 +351,19 @@ export async function GET(request: NextRequest) {
     console.log('Cache miss or update forced, fetching fresh data...')
     
     // Fetch RSS feeds from JSON file
+    const requestOrigin = (() => {
+      try {
+        return request.nextUrl?.origin
+      } catch (error) {
+        return undefined
+      }
+    })()
+
     const defaultFeedsUrl = process.env.NEXT_PUBLIC_APP_URL
       ? new URL('/rss_feeds.json', process.env.NEXT_PUBLIC_APP_URL).href
-      : 'http://localhost:3001/rss_feeds.json'
+      : requestOrigin
+        ? new URL('/rss_feeds.json', requestOrigin).href
+        : 'http://localhost:3001/rss_feeds.json'
 
     const feedsUrl =
       process.env.RSS_FEEDS_URL ??
@@ -362,6 +372,7 @@ export async function GET(request: NextRequest) {
 
     let RSS_FEEDS: RSSFeed[] = []
     try {
+      console.log(`Attempting to fetch RSS feed list from: ${feedsUrl}`)
       const feedsResponse = await fetch(feedsUrl)
       if (!feedsResponse.ok) {
         throw new Error(`Failed to fetch RSS feeds: ${feedsResponse.status}`)
@@ -369,7 +380,7 @@ export async function GET(request: NextRequest) {
       RSS_FEEDS = await feedsResponse.json()
       console.log(`Fetched ${RSS_FEEDS.length} RSS feeds from JSON (${feedsUrl})`)
     } catch (error) {
-      console.error('Error fetching RSS feeds JSON:', error)
+      console.error(`Error fetching RSS feeds JSON from ${feedsUrl}:`, error)
       console.log('Using empty RSS feeds list')
       // Return empty news instead of error
       return respondWithJson(request, [], {
