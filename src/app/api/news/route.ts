@@ -494,3 +494,11 @@ export async function GET(request: NextRequest) {
         status: 500,
       })
     }
+  } catch (error) {
+    console.error('Unhandled error in GET /api/news route:', error)
+    return respondWithJson(request, [], {
+      status: 500,
+      headers: DEFAULT_RESPONSE_HEADERS,
+    })
+  }
+}
