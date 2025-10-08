@@ -40,6 +40,57 @@ const decodeHtmlEntities = (value: string) => {
 
 const ONE_HOUR_MS = 60 * 60 * 1000
 
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? process.env.NEXT_PUBLIC_ALLOWED_ORIGINS ?? '')
+  .split(',')
+  .map(origin => origin.trim())
+  .filter(Boolean)
+
+const resolveAllowedOrigin = (originHeader?: string | null) => {
+  if (ALLOWED_ORIGINS.length === 0) {
+    return originHeader ?? process.env.NEXT_PUBLIC_APP_URL ?? '*'
+  }
+
+  if (ALLOWED_ORIGINS.includes('*')) {
+    return '*'
+  }
+
+  if (originHeader && ALLOWED_ORIGINS.includes(originHeader)) {
+    return originHeader
+  }
+
+  if (!originHeader && process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL
+  }
+
+  return ALLOWED_ORIGINS[0]
+}
+
+const getCorsHeaders = (request: NextRequest, additionalHeaders: Record<string, string> = {}) => {
+  const originHeader = request.headers.get('origin')
+  return {
+    'Access-Control-Allow-Origin': resolveAllowedOrigin(originHeader),
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    ...additionalHeaders,
+  }
+}
+
+const respondWithJson = (
+  request: NextRequest,
+  data: unknown,
+  init?: { status?: number; headers?: Record<string, string> }
+) => {
+  const headers = getCorsHeaders(request, init?.headers ?? {})
+  return NextResponse.json(data, {
+    status: init?.status ?? 200,
+    headers,
+  })
+}
+
+const DEFAULT_RESPONSE_HEADERS = {
+  'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+}
+
 type CacheFileInfo = {
   file: string
   path: string
@@ -290,13 +341,8 @@ export async function GET(request: NextRequest) {
       
       if (cache && (now - cache.timestamp) <= ONE_HOUR_MS) {
         console.log(`Using cached data for ${categoryParam} (${cache.data.length} items)`)
-        return NextResponse.json(cache.data, {
-          headers: {
-            'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET',
-            'Access-Control-Allow-Headers': 'Content-Type',
-          },
+        return respondWithJson(request, cache.data, {
+          headers: DEFAULT_RESPONSE_HEADERS,
         })
       }
     }
@@ -317,13 +363,8 @@ export async function GET(request: NextRequest) {
       console.error('Error fetching RSS feeds JSON:', error)
       console.log('Using empty RSS feeds list')
       // Return empty news instead of error
-      return NextResponse.json([], {
-        headers: {
-          'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
+      return respondWithJson(request, [], {
+        headers: DEFAULT_RESPONSE_HEADERS,
       })
     }
     
@@ -375,12 +416,9 @@ export async function GET(request: NextRequest) {
     } catch (error) {
       console.error('Error fetching RSS feeds JSON:', error)
       console.log('Using empty RSS feeds list')
-      return NextResponse.json([], {
+      return respondWithJson(request, [], {
         headers: {
           'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET',
-          'Access-Control-Allow-Headers': 'Content-Type',
         },
       })
     }
@@ -394,8 +432,7 @@ export async function GET(request: NextRequest) {
     const timestamp = Date.now()
     let allNews: NewsItem[] = []
     let useCache = !update
-    
-    // Check if all categories have recent cache
+
     if (useCache) {
       const cacheChecks = await Promise.all(
         allCategories.map(async category => {
@@ -405,87 +442,52 @@ export async function GET(request: NextRequest) {
       )
       useCache = cacheChecks.every(Boolean)
     }
-    
+
     if (useCache) {
       console.log('Using cached data for all categories')
-      // Load from cache for the requested category
       const cache = await getLatestCategoryCache(categoryParam === 'ALL' ? 'all' : categoryParam)
       if (cache) {
-        return NextResponse.json(cache.data, {
+        return respondWithJson(request, cache.data, {
           headers: {
             'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET',
-            'Access-Control-Allow-Headers': 'Content-Type',
           },
         })
       }
     }
-    
+
     // If we get here, we need to fetch fresh data
     console.log('Fetching all news feeds...')
     try {
       allNews = await processFeeds(RSS_FEEDS)
-      
+
       if (allNews.length === 0) {
         console.log('No news items were fetched. Returning empty array.')
-        return NextResponse.json([], {
+        return respondWithJson(request, [], {
           headers: {
             'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET',
-            'Access-Control-Allow-Headers': 'Content-Type',
           },
         })
       }
-      
+
       // Sort by publication date (newest first)
       allNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
-      
+
       // Save to cache by category
       console.log('Saving news to cache by category...')
       await saveNewsByCategory(allNews, timestamp)
-      
+
       // Filter by requested category if needed
       let responseData = allNews
       if (categoryParam !== 'ALL') {
         responseData = allNews.filter(item => item.category?.toUpperCase() === categoryParam)
       }
-      
+
       console.log(`Successfully fetched and cached ${responseData.length} news items`)
-      return NextResponse.json(responseData, {
+      return respondWithJson(request, responseData, {
         headers: {
           'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET',
-          'Access-Control-Allow-Headers': 'Content-Type',
         },
       })
-    } catch (error) {
-      console.error('Error in news API:', error)
-      // Try to return cached data if available, even if there was an error
-      const cache = await getLatestCategoryCache(categoryParam === 'ALL' ? 'all' : categoryParam)
-      if (cache) {
-        console.log('Error occurred, returning cached data')
-        return NextResponse.json(cache.data, {
-          headers: {
-            'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET',
-            'Access-Control-Allow-Headers': 'Content-Type',
-          },
-        })
-      }
-      return await NextResponse.json(
-        { error: 'Failed to fetch news and no cache available' },
-        { status: 500 }
-      )
+        status: 500,
+      })
     }
-  } catch (error) {
-    console.error('Unhandled error in GET /api/news:', error);
-    return NextResponse.json(
-      { error: 'An unexpected error occurred' },
-      { status: 500 }
-    );
-  }
-}
